@@ -7930,6 +7930,8 @@ string NeonGetIntrinsicName(uint32_t intrinsic)
 		return "vand_s64";
 	case ARM64_INTRIN_VCVTD_N_U64_F32:
 		return "vcvtd_n_u64_f32";
+	case ARM64_INTRIN_VCVTD_N_S32_F64:
+		return "vcvtd_n_s32_f64";
 	default:
 		return "";
 	}
@@ -17619,6 +17621,16 @@ bool NeonGetLowLevelILForInstruction(
 			// results: Sd -> result
 			intrin_id = ARM64_INTRIN_VCVTXD_F32_F64;  // FCVTXN Sd,Dn
 		add_input_reg(inputs, il, instr.operands[1]);
+		add_output_reg(outputs, il, instr.operands[0]);
+		break;
+	case ENC_FCVTZS_32D_FLOAT2FIX:
+		if ((instr.operands[0].reg[0] >= REG_W0 && instr.operands[0].reg[0] <= REG_WSP) && (instr.operands[1].reg[  0] >= REG_D0 && instr.operands[1].reg[0] <= REG_D31) && (instr.operands[2].operandClass && instr.operands[2].operandClass <= FIMM32))
+			// int32_t vcvtd_n_s32_f64(float64_t a, const int n)
+			// argprep: a -> Dn, n -> n
+			// results: Wd -> result
+			intrin_id = ARM64_INTRIN_VCVTD_N_S32_F64;  // FCVTZS Wd,Dn,#n
+		add_input_reg(inputs, il, instr.operands[1]);
+		add_input_imm(inputs, il, instr.operands[2]);
 		add_output_reg(outputs, il, instr.operands[0]);
 		break;
 	case ENC_FCVTZS_32D_FLOAT2INT:

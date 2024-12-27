@@ -3332,6 +3332,10 @@ tests_fcvt = [
     (b'\x95\xFC\x7C\x5F', 'LLIL_INTRINSIC([d21],vcvtd_n_s64_f64,[LLIL_REG.q(d4),LLIL_CONST(4)])'),
     # fcvtzs d27, d5, #0x2f                                            FCVTZS_asisdshf_C
     (b'\xBB\xFC\x51\x5F', 'LLIL_INTRINSIC([d27],vcvtd_n_s64_f64,[LLIL_REG.q(d5),LLIL_CONST(47)])'),
+    # fcvtzs w8, d0, #0x1b                                             FCVTZS_32D_float2fix
+    (b'\x08\x94\x58\x1e', 'LLIL_INTRINSIC([w8],vcvtd_n_s32_f64,[LLIL_REG.q(d0),LLIL_CONST(27)])'),
+    # fcvtzs w9, d8, #0x0f                                             FCVTZS_32D_float2fix
+    (b'\x09\xc5\x58\x1e', 'LLIL_INTRINSIC([w9],vcvtd_n_s32_f64,[LLIL_REG.q(d8),LLIL_CONST(15)])'),
     # fcvtzu w22, d30, #0x18                                           FCVTZU_32D_float2fix
     (b'\xD6\xA3\x59\x1E', 'LLIL_INTRINSIC([w22],vcvts_n_u32_f64,[LLIL_REG.q(d30),LLIL_CONST(24)])'),
     # fcvtzu w23, d16, #0x1d                                           FCVTZU_32D_float2fix
